@@ -1,0 +1,32 @@
+% in "D:\Desktop\Computer Algebra\homework1\test.reduce";
+
+procedure cof_list(poly, var);
+begin scalar res, flag, high_cof;
+    res := {};
+    flag := true;
+    while not(deg(poly, var) = 0) do <<
+        high_cof := lcof(poly, var);
+        res := high_cof . res;
+        poly := poly - high_cof * (var ^ (deg(poly, var)));
+    >>;
+    if not(poly = 0) then
+        res := poly . res;
+    return reverse res;
+end;
+
+procedure vararg_gcd(xs);
+    if xs = {} then 1
+    else if length xs = 1 then first xs
+    else gcd(first xs, vararg_gcd(rest xs));
+
+procedure my_cont(poly, var); vararg_gcd cof_list(poly, var);
+
+procedure pp(poly, var);
+    if poly = 0 then 0
+    else poly / my_cont(poly, var);
+
+procedure prem(a, b, var); second pseudo_divide(a, b, var);
+
+procedure premgcd(a, b, var);
+    if b = 0 then a
+    else premgcd(b, pp(prem(a, b, var), var), var);
