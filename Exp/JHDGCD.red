@@ -1,6 +1,6 @@
 % JHD.red
 % by JalenCato
-% in "D:\DeskTop\Computer Algebra\Exp\JHDGCD.red";
+% in "D:\DeskTop\Computer Algebra\Exp\JHDGCD.red"; 
 
 procedure divPoly(poly, xlist, var);
 begin scalar result;
@@ -109,14 +109,6 @@ end;
 procedure myCont(poly, var); varGCD(cofList(poly, var));
 
 procedure prem(a, b, var); second pseudo_divide(a, b, var);
-
-procedure numberGCD(xlist);
-   if xlist = {} then 1
-   else if length xlist = 1 then first xlist
-   else gcd(first xlist, numberGCD(rest xlist));
-
-procedure myCont(poly, var);
-   numberGCD(cofList(poly, var));
 
 procedure pp(poly, var);
    if poly = 0 then 0
